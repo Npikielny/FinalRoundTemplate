@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CartItemRow: View {
-    var item: Item
+    @Binding var item: Item
     
     var body: some View {
         Text(item.name)
@@ -17,6 +17,6 @@ struct CartItemRow: View {
 
 struct CartItemRow_Previews: PreviewProvider {
     static var previews: some View {
-        CartItemRow(item: Item.model)
+        CartItemRow(item: .constant(Item.model))
     }
 }

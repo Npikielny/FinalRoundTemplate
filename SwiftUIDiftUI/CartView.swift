@@ -11,10 +11,21 @@ struct CartView: View {
     @Binding var items: [Item]
     
     var body: some View {
-        var cartItems = items.filter({ $0.inCart })
-        List(cartItems, id: \.self) { item in
-            CartItemRow(item: item)
+        let cartItemIndices = items
+            .enumerated()
+            .filter { $0.element.inCart }
+            .map { $0.offset }
+        List {
+            ForEach(cartItemIndices, id: \.self) { idx in
+                CartItemRow(item: _items[idx])
+            }
+            .onDelete { idxSet in
+                idxSet.forEach {
+                items[cartItemIndices[$0]].inCart.toggle()
+            }}
         }
+        
+        
     }
 }
 
