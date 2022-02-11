@@ -21,11 +21,10 @@ struct CartView: View {
             }
             .onDelete { idxSet in
                 idxSet.forEach {
-                items[cartItemIndices[$0]].inCart.toggle()
-            }}
+                    items[cartItemIndices[$0]].inCart.toggle()
+                }
+            }
         }
-        
-        
     }
 }
 
