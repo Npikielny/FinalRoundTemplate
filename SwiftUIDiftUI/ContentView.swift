@@ -8,23 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var selected: [Item] = []
-    
-    var items = Item.models
-    
+    @State var items: [Item] = Item.models
+        
     var body: some View {
         TabView {
-            Products()
+            Products(items: $items)
                 .tabItem {
                     VStack {
                         Image(systemName: "bag.circle.fill")
                         Text("Products")
                     }
                 }
-            Products()
+            CartView(items: $items)
                 .tabItem {
                     Image(systemName: "cart.circle.fill")
-                    Text("Cart" + (selected.count == 0 ? "" : " (\(selected.count))"))
+                    let cartItems = items.filter { $0.inCart }
+                    Text("Cart" + (cartItems.count == 0 ? "" : " (\(cartItems.count))"))
                 }
         }
     }

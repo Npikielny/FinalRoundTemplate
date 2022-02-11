@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ItemCard: View {
-    var item: Item
+    @Binding var item: Item
     
     var body: some View {
         VStack {
             item.image
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 100, height: 100)
                 .cornerRadius(15)
             HStack {
@@ -24,13 +24,13 @@ struct ItemCard: View {
             }
         }
         .padding()
-        .background(Color.mint.opacity(0.25))
+        .background(item.inCart ? Color.gray.opacity(0.25) : Color.mint.opacity(0.25))
         .cornerRadius(15)
     }
 }
 
 struct ItemCard_Previews: PreviewProvider {
     static var previews: some View {
-        ItemCard(item: Item.model)
+        ItemCard(item: .constant(Item.jeff))
     }
 }
