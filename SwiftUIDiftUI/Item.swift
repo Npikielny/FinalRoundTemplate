@@ -9,11 +9,12 @@ import Foundation
 import SwiftUI
 
 struct Item: Hashable {
-    static let model = Item(imageName: "pickles", name: "Plant", price: 15)
-    static let models = Array(repeating: model, count: 15)
+    static var model = Item(imageName: "pickles", name: "Plant", price: 15)
+    static var models = Array(repeating: model, count: 15)
     
-    var imageName: String
+    private var imageName: String
     var image: Image { Image(imageName) }
     var name: String
     var price: Double
+    var inCart: Bool = false
 }

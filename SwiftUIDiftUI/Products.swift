@@ -8,16 +8,22 @@
 import SwiftUI
 
 struct Products: View {
-    var items = Item.models
+    @Binding var items: [Item]
     
     var body: some View {
         ScrollView {
-            ForEach(0..<(items.count + 1) / 2, id: \.self) { row in
+            ForEach((0...items.count / 2), id: \.self) { row in
                 HStack {
-                    ItemCard(item: items[row * 2])
+                    ItemCard(item: $items[2 * row])
+                        .onTapGesture {
+                            items[2 * row].inCart.toggle()
+                        }
                     Spacer()
-                    if row * 2 + 1 < items.count {
-                        ItemCard(item: items[row * 2 + 1])
+                    if 2 * row + 1 < items.count {
+                        ItemCard(item: $items[2 * row + 1])
+                            .onTapGesture {
+                                items[2 * row + 1].inCart.toggle()
+                            }
                     } else {
                         EmptyView()
                     }
@@ -30,6 +36,6 @@ struct Products: View {
 
 struct Products_Previews: PreviewProvider {
     static var previews: some View {
-        Products()
+        Products(items: .constant([]))
     }
 }
