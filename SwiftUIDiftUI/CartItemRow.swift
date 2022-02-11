@@ -11,12 +11,24 @@ struct CartItemRow: View {
     @Binding var item: Item
     
     var body: some View {
-        Text(item.name)
+        HStack(alignment: .center) {
+            VStack {
+                item.image
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .cornerRadius(15)
+                Text(item.name)
+            }
+            Spacer()
+            Text("$" + String(format: "%.2f", item.price))
+        }
+        .padding()
     }
 }
 
 struct CartItemRow_Previews: PreviewProvider {
     static var previews: some View {
-        CartItemRow(item: .constant(Item.model))
+        CartItemRow(item: .constant(Item.pickles))
     }
 }

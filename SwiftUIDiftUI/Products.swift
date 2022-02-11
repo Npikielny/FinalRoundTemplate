@@ -12,7 +12,7 @@ struct Products: View {
     
     var body: some View {
         ScrollView {
-            ForEach((0...items.count / 2), id: \.self) { row in
+            ForEach((0..<(items.count + 1) / 2), id: \.self) { row in
                 HStack {
                     ItemCard(item: $items[2 * row])
                         .onTapGesture {

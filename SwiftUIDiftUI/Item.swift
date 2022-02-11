@@ -9,8 +9,20 @@ import Foundation
 import SwiftUI
 
 struct Item: Hashable {
-    static var model = Item(imageName: "pickles", name: "Plant", price: 15)
-    static var models = Array(repeating: model, count: 15)
+    static var pickles = Item(imageName: "pickles", name: "Pickles", price: 15)
+    static var jeff = Item(imageName: "jeff", name: "Jeff", price: 0.99)
+    static var bluePants = Item(imageName: "bluepants", name: "Blue Pants", price: 99999.99)
+    static var sandals = Item(imageName: "sandals", name: "Sandals", price: 13.49)
+    
+    static var models: [Item] = {
+        var tempModels = [Item]()
+        let models = [pickles, jeff, bluePants, sandals]
+        for _ in 0...17 {
+            let seed = Int.random(in: 0..<models.count)
+            tempModels.append(models[seed])
+        }
+        return tempModels
+    }()
     
     private var imageName: String
     var image: Image { Image(imageName) }
